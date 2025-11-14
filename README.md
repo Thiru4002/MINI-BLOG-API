@@ -29,22 +29,41 @@ This project includes authentication, role-based access, post management and com
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
+```
 mini-blog-api/
+│
 ├── backend/
-│ ├── src/
-│ │ ├── controllers/
-│ │ ├── middlewares/
-│ │ ├── models/
-│ │ ├── routes/
-│ │ ├── utils/
-│ │ ├── app.js # express app, middleware & routes
-│ │ └── server.js # starts the server (calls app.listen)
-│ ├── package.json
-│ └── .env (ignored)
+│   ├── app.js              # Main express app (routes + middleware)
+│   ├── server.js           # Starts the server
+│   │
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── userController.js
+│   │   ├── postController.js
+│   │   └── commentController.js
+│   │
+│   ├── models/
+│   │   ├── user.js
+│   │   ├── post.js
+│   │   └── comment.js
+│   │
+│   ├── routes/
+│   │   ├── userRoutes.js
+│   │   ├── postRoutes.js
+│   │   └── commentRoutes.js
+│   │
+│   ├── middlewares/
+│   │   ├── auth.js
+│   │   └── ownerCheck.js
+│   │
+│   └── utils/
+│       └── token.js
+│
 ├── .gitignore
 └── README.md
+```
 
 ## 🎯 Purpose of This Project
 
