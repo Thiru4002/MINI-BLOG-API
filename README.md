@@ -24,8 +24,6 @@ This project includes authentication, role-based access, post management and com
 - **Helmet** — secure HTTP headers  
 - **Rate Limiting** — request throttling  
 - **CORS** — configure allowed origins  
-- **XSS Clean** — sanitize input  
-- Basic MongoDB injection protections
 
 ---
 
@@ -35,31 +33,18 @@ This project includes authentication, role-based access, post management and com
 mini-blog-api/
 │
 ├── backend/
-│   ├── app.js              # Main express app (routes + middleware)
+│   ├── app.js              # Main express app 
 │   ├── server.js           # Starts the server
 │   │
 │   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── userController.js
-│   │   ├── postController.js
-│   │   └── commentController.js
 │   │
 │   ├── models/
-│   │   ├── user.js
-│   │   ├── post.js
-│   │   └── comment.js
 │   │
 │   ├── routes/
-│   │   ├── userRoutes.js
-│   │   ├── postRoutes.js
-│   │   └── commentRoutes.js
 │   │
 │   ├── middlewares/
-│   │   ├── auth.js
-│   │   └── ownerCheck.js
 │   │
 │   └── utils/
-│       └── token.js
 │
 ├── .gitignore
 └── README.md
