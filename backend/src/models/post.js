@@ -6,9 +6,9 @@ const postSchema = new mongoose.Schema({
         required:[true,"title is required"],
         trim: true,
     },
-    content:{
+    description:{
         type:String,
-        required:[true,"content is required"],
+        required:[true,"description is required"],
     },
     author:{
         type:mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Item</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>My App</h1>
+      <nav>
+        <ul>
+          <li><a href="profile.html">My Profile</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="list.html">All Blogs</a></li>
+          <li><a href="create.html">Create New</a></li>
+          <li><a id="logoutBtn" style="cursor:pointer;">Logout</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2 class="text-center mb-2">Edit Blog</h2>
+
+      <!-- REAL EDIT FORM -->
+      <form id="editForm" class="form-container">
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" ></textarea>
+        </div>
+
+        <button type="submit" class="btn">Update Blog</button>
+      </form>
+
+      <p class="text-center mt-2">
+        <a id="cancelBtn" class="btn">Cancel</a>
+      </p>
+    </div>
+
+    <script src="js/editBlog.js"></script>
+    <script src="js/logout.js"></script>
+
+  </main>
+
+
+
+  <footer>
+    <p>&copy; 2025 My App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

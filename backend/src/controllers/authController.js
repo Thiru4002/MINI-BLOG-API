@@ -4,8 +4,7 @@ const crypto = require("crypto");
 
 const register = async (req,res,next) => {
     try{
-        console.log("📩 Request received at /api/users/register");
-        console.log("Request body:", req.body);
+
 
         const {username,email,password} = req.body;
 

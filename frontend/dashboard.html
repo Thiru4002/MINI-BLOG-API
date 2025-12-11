@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>My App</h1>
+      <nav>
+        <ul>
+          <li><a href="profile.html">My Profile</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="list.html">All Blogs</a></li>
+          <li><a href="create.html">Create New</a></li>
+          <li><a id="logoutBtn" style="cursor:pointer;">Logout</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <h2 class="text-center mb-2">Welcome, <span id="username"></span></h2>
+
+      <p class="text-center">
+        Total Blogs: <strong id="totalPosts">0</strong>
+      </p>
+
+      <h3 class="mt-3">My Blogs</h3>
+
+      <div id="blogList" class="blog-list"></div>
+
+      <p class="text-center mt-2">
+        <a href="create.html" class="btn">Create New Blog</a>
+      </p>
+
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/logout.js"></script>
+
+  </main>
+
+
+
+  <footer>
+    <p>&copy; 2025 My App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

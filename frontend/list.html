@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Blogs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>My App</h1>
+      <nav>
+        <ul id="navLinks"></ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+    <div class="search-box" style="margin: 20px 0;">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="Search blogs by title..." 
+        class="form-input"
+        style="width: 100%; padding: 10px; border-radius: 5px;"
+      >
+      <button id="searchBtn" class="btn" style="margin-top: 10px;">Search</button>
+    </div>
+
+    <div class="container">
+      <h2 class="text-center mb-2">All Blogs</h2>
+
+      <div id="allBlogs" class="blog-list"></div>
+
+      <p class="text-center mt-2">
+        <a href="dashboard.html" class="btn">Back to My Dashboard</a>
+      </p>
+    </div>
+
+    <script src="js/navbar.js"></script>
+    <script src="./js/listBlogs.js"></script>
+  </main>
+
+
+  <footer>
+    <p>&copy; 2024 My App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

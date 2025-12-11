@@ -11,7 +11,7 @@ router.get("/:id",postController.getSinglePost);
 
 //procted routes..
 router.post("/",protect,postController.createPost);
-router.put("/:id",protect,ownerCheck,postController.updatePost);
+router.patch("/:id",protect,ownerCheck,postController.updatePost);
 router.delete('/:id',protect,ownerCheck,postController.deletePost);
 router.post('/like/:id',protect,postController.likePost);
 router.post('/unlike/:id',protect,postController.unlike);

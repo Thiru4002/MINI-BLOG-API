@@ -5,6 +5,14 @@ This project includes authentication, role-based access, post management and com
 
 ---
 
+## 📘 Live API Documentation (Swagger UI)
+
+When running locally:
+
+👉 **http://localhost:5000/api-docs**
+
+
+
 ## 🚀 Features
 
 ### 📌 Authentication & Authorization
@@ -18,7 +26,7 @@ This project includes authentication, role-based access, post management and com
 - Create, read, update, delete posts (CRUD)  
 - Comment system (add / list / delete)  
 - Each user can manage their own posts; admin can manage everything  
-- Pagination, filtering and sorting support
+- Pagination, filtering
 
 ### 🔐 Security Enhancements
 - **Helmet** — secure HTTP headers  
@@ -33,21 +41,20 @@ This project includes authentication, role-based access, post management and com
 mini-blog-api/
 │
 ├── backend/
-│   ├── app.js              # Main express app 
-│   ├── server.js           # Starts the server
-│   │
-│   ├── controllers/
-│   │
-│   ├── models/
-│   │
-│   ├── routes/
-│   │
-│   ├── middlewares/
-│   │
-│   └── utils/
+│ ├── src/
+│ │ ├── config/
+│ │ ├── controllers/
+│ │ ├── middlewares/
+│ │ ├── models/
+│ │ ├── routes/
+│ │ ├── docs/
+│ │ ├── app.js
+│ │ └── server.js
+│ │
+│ ├── package.json
+│ └── README.md
 │
-├── .gitignore
-└── README.md
+└── frontend/ (Demo UI)
 ```
 
 ## 🎯 Purpose of This Project

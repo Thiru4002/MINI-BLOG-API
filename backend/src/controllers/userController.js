@@ -1,5 +1,6 @@
 // controllers/userController.js
 const User = require("../models/user");
+const Post = require("../models/post");
 
 // update own profile
 const updateUser = async (req, res, next) => {
@@ -34,4 +35,28 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-module.exports = { updateUser };
+const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const posts = await Post.find({ author: req.params.id }).sort("-createdAt");
+
+    res.status(200).json({
+      success: true,
+      data: {
+        user,
+        totalPosts: posts.length,
+        posts
+      }
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+module.exports = { updateUser , getUserProfile };

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Author Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>My App</h1>
+    <nav>
+      <ul>
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="list.html">All Blogs</a></li>
+        <li><a href="create.html">Create New</a></li>
+        <li><a id="logoutBtn" style="cursor:pointer;">Logout</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- AUTHOR INFO -->
+    <h2 id="authorName"></h2>
+    <p id="authorEmail"></p>
+    <p id="authorJoined"></p>
+
+    <!-- EDIT BUTTON (ONLY OWNER CAN SEE) -->
+    <button 
+      id="editBtnProfile" 
+      class="btn" 
+      style="margin-top: 15px; display:none;"
+    >
+      Edit Profile
+    </button>
+
+    <!-- EDIT PROFILE FORM (ONLY OWNER CAN SEE) -->
+    <div 
+      id="editProfileBox" 
+      style="
+        display:none; 
+        margin-top: 20px; 
+        background: #fff; 
+        padding: 1rem; 
+        border-radius: 5px; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
+    >
+      <label for="newUsername">New Username</label>
+      <input 
+        type="text" 
+        id="newUsername" 
+        class="form-input" 
+        style="width:100%; padding: 0.7rem; margin-top: 5px;"
+      />
+
+      <button 
+        id="saveUsernameBtn" 
+        class="btn" 
+        style="margin-top: 10px;"
+      >
+        Save
+      </button>
+    </div>
+
+    <hr style="margin: 2rem 0;">
+
+    <!-- POSTS LIST -->
+    <h3>Total Posts: <span id="postCount"></span></h3>
+    <div id="authorPosts"></div>
+
+  </div>
+</main>
+
+<script src="js/author.js"></script>
+<script src="js/logout.js"></script>
+
+
+</body>
+</html>

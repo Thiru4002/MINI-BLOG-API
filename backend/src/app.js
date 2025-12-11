@@ -26,12 +26,44 @@ app.use(express.json());
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const {swaggerUi,swaggerSpec} = require("./config/swagger");
 
+/* ---------------------------
+   SWAGGER SETUP
+----------------------------*/
+
+const swaggerUiOptions = {
+  explorer: true,
+  swaggerOptions: {
+    requestInterceptor: (req) => {
+      // header names can be lower/upper case depending on environment
+      const header = req.headers.Authorization || req.headers.authorization;
+
+      if (header) {
+        // if header exists but does NOT already start with "Bearer "
+        if (!/^Bearer\s/i.test(header)) {
+          // set the correctly prefixed header
+          req.headers.Authorization = "Bearer " + header;
+        }
+      }
+      return req;
+    }
+  }
+};
+
+app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerSpec));
+
+/* ---------------------------
+   API ROUTES
+----------------------------*/
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 
-// global error handler (always last)
+
+/* ---------------------------
+   GLOBAL ERROR HANDLER
+----------------------------*/
 app.use((err, req, res, next) => {
   console.error(err.stack || err);
   res.status(err.status || 500).json({ error: err.message || 'something went wrong' });

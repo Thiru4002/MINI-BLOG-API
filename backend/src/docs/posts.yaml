@@ -1,0 +1,129 @@
+paths:
+  /posts:
+    get:
+      summary: Get all posts
+      tags:
+        - Posts
+      responses:
+        200:
+          description: List of all posts
+
+    post:
+      summary: Create a new post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - description
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        201:
+          description: Post created
+
+  /posts/{id}:
+    get:
+      summary: Get a single post by ID
+      tags:
+        - Posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post details
+
+    patch:
+      summary: Update a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        200:
+          description: Post updated
+        403:
+          description: Not authorized
+
+    delete:
+      summary: Delete a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post deleted
+        403:
+          description: Not authorized
+
+  /posts/like/{id}:
+    post:
+      summary: Like a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post liked
+
+  /posts/unlike/{id}:
+    post:
+      summary: Unlike a post
+      tags:
+        - Posts
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Post unliked

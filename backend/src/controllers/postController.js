@@ -4,15 +4,15 @@ const Post = require("../models/post");
 
 const createPost = async (req,res,next) => {
     try{
-        const {title,content,tags} = req.body;
+        const {title,description,tags} = req.body;
 
-        if(!title || !content || !tags){
+        if(!title || !description){
             return res.status(400).json({message:"Title or Content are required"});
         }
 
         const post = await Post.create({
             title,
-            content,
+            description,
             tags,
             author:req.user.id,
         });
@@ -94,30 +94,31 @@ const getSinglePost = async (req,res,next) => {
 
 //update post..
 
-const updatePost = async (req,res,next) => {
-    try{
-        const {title,content,tags} = req.body;
+const updatePost = async (req, res, next) => {
+  try {
+    const updates = req.body;
 
-        let post = await Post.findById(req.params.id);
-
-        if(!post){
-            return res.status(404).json({message:"Post not found"});
-        }
-
-        post.title = req.body.title || post.title;
-        post.content = req.body.content || post.content;
-        post.tags = req.body.tags || post.tags;
-
-        await post.save();
-
-        res.status(200).json({
-            message:"Post updated success",
-            data:post,
-        });
-    }catch(err){
-        next(err);
+    let post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
     }
+
+    if (updates.title !== undefined) post.title = updates.title;
+    if (updates.description !== undefined) post.description = updates.description;
+    if (updates.tags !== undefined) post.tags = updates.tags;
+
+    await post.save();
+
+    res.status(200).json({
+      success: true,
+      data: post,
+    });
+
+  } catch (err) {
+    next(err);
+  }
 };
+
 
 //delete post..
 
@@ -127,6 +128,11 @@ const deletePost = async (req,res,next) => {
 
         if(!post){
             return res.status(404).json({message:"Post is not found"});
+        }
+
+         // Optional: Only author can delete
+        if (post.author.toString() !== req.user.id) {
+        return res.status(403).json({ message: "Not allowed to delete this post" });
         }
 
         await post.deleteOne();
