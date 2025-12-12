@@ -6,10 +6,22 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 
 // security headers
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginOpenerPolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
-// enable cors
-app.use(cors());
+// enable CORS for frontend
+app.use(
+  cors({
+    origin: "*", // allow all origins
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // rate limiting
 const limiter = rateLimit({
