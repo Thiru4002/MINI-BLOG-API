@@ -1,8 +1,8 @@
 async function loadAllBlogs(searchQuery = "") {
   try {
     const url = searchQuery
-      ? `http://localhost:5000/api/posts?search=${encodeURIComponent(searchQuery)}`
-      : `http://localhost:5000/api/posts`;
+      ? `https://mini-blog-api-m5ys.onrender.com/api/posts?search=${encodeURIComponent(searchQuery)}`
+      : `https://mini-blog-api-m5ys.onrender.com/api/posts`;
 
     const res = await fetch(url);
     const data = await res.json();

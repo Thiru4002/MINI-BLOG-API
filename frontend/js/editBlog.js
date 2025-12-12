@@ -5,7 +5,7 @@ const blogId = params.get("id");
 // Load existing blog data into form
 async function loadBlog() {
   try {
-    const res = await fetch(`http://localhost:5000/api/posts/${blogId}`);
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`);
     const data = await res.json();
 
     if (!res.ok || !data.data) {
@@ -46,7 +46,7 @@ form.addEventListener("submit", async (e) => {
   if (title !== "") body.title = title;
   if (description !== "") body.description = description;
 
-  const res = await fetch(`http://localhost:5000/api/posts/${blogId}`, {
+  const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

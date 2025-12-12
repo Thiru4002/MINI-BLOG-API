@@ -6,7 +6,7 @@ const currentUserId = localStorage.getItem("userId"); // logged in user
 
 async function loadAuthor() {
   try {
-    const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`, {
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/users/profile/${userId}`, {
       headers: { "Authorization": "Bearer " + token }
     });
 

@@ -15,7 +15,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/posts", {
+    const res = await fetch("https://mini-blog-api-m5ys.onrender.com/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=UTF-8",

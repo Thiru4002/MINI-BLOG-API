@@ -8,7 +8,7 @@ form.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value;
 
   try {
-    const res = await fetch("http://localhost:5000/api/users/signup", {
+    const res = await fetch("https://mini-blog-api-m5ys.onrender.com/api/users/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=UTF-8"

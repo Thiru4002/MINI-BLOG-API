@@ -12,7 +12,7 @@ const options = {
       description: "API Documentation for Blog App"
     },
     servers: [
-      { url: "http://localhost:5000/api" }
+      { url: "https://mini-blog-api-m5ys.onrender.com/api" }
     ],
     components: {
       securitySchemes: {

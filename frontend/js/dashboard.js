@@ -2,7 +2,7 @@ async function loadDashboard() {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch("http://localhost:5000/api/users/dashboard", {
+    const res = await fetch("https://mini-blog-api-m5ys.onrender.com/api/users/dashboard", {
       headers: {
         "Authorization": "Bearer " + token
       }
@@ -67,7 +67,7 @@ async function deletePost(postId) {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${postId}`, {
       method: "DELETE",
       headers: {
         "Authorization": "Bearer " + token

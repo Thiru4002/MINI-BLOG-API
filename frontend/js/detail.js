@@ -8,7 +8,7 @@ console.log("POST ID:", postId);
 // Load the single post
 async function loadPost() {
   try {
-    const res = await fetch(`http://localhost:5000/api/posts/${postId}`);
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${postId}`);
     const data = await res.json();
 
     if (!res.ok || !data?.data) {
@@ -62,7 +62,7 @@ async function loadPost() {
         const token = localStorage.getItem("token");
         if (!token) return window.location.href = "login.html";
 
-        const resDel = await fetch(`http://localhost:5000/api/posts/${post._id}`, {
+        const resDel = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${post._id}`, {
           method: "DELETE",
           headers: { "Authorization": "Bearer " + token }
         });
@@ -91,7 +91,7 @@ loadPost();
 ---------------------------------- */
 async function loadComments() {
   try {
-    const res = await fetch(`http://localhost:5000/api/comments/${postId}`);
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/comments/${postId}`);
     const data = await res.json();
 
     if (!res.ok) {
@@ -141,7 +141,7 @@ if (!localStorage.getItem("token")) {
 
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`http://localhost:5000/api/comments/${postId}`, {
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/comments/${postId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -172,7 +172,7 @@ function attachCommentListeners() {
     btn.onclick = async () => {
       const id = btn.dataset.id;
 
-      const res = await fetch(`http://localhost:5000/api/comments/${id}`, {
+      const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/comments/${id}`, {
         method: "DELETE",
         headers: { "Authorization": "Bearer " + token }
       });
@@ -190,7 +190,7 @@ function attachCommentListeners() {
 
       if (!newContent) return;
 
-      const res = await fetch(`http://localhost:5000/api/comments/${id}`, {
+      const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/comments/${id}`, {
         method: "PATCH",
         headers: {
           "Authorization": "Bearer " + token,
@@ -222,8 +222,8 @@ document.getElementById("likeBtn").addEventListener("click", async () => {
   const isLiked = post.likes.includes(userId);
 
   const url = isLiked
-    ? `http://localhost:5000/api/posts/unlike/${postId}`
-    : `http://localhost:5000/api/posts/like/${postId}`;
+    ? `https://mini-blog-api-m5ys.onrender.com/api/posts/unlike/${postId}`
+    : `https://mini-blog-api-m5ys.onrender.com/api/posts/like/${postId}`;
 
   const res = await fetch(url, {
     method: "POST",

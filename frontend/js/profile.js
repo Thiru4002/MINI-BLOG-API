@@ -3,7 +3,7 @@ const userId = localStorage.getItem("userId");
 
 async function loadProfile() {
   try {
-    const res = await fetch(`http://localhost:5000/api/users/profile/${userId}`, {
+    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/users/profile/${userId}`, {
       headers: {
         "Authorization": "Bearer " + token
       }
@@ -46,7 +46,7 @@ document.getElementById("saveUsernameBtn").addEventListener("click", async () =>
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/users/update", {
+    const res = await fetch("https://mini-blog-api-m5ys.onrender.com/api/users/update", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

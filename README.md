@@ -7,9 +7,8 @@ This project includes authentication, role-based access, post management and com
 
 ## 📘 Live API Documentation (Swagger UI)
 
-When running locally:
 
-👉 **http://localhost:5000/api-docs**
+👉 **https://mini-blog-api-m5ys.onrender.com/api-docs**
 
 
 
