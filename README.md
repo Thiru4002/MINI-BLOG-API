@@ -73,6 +73,6 @@ Perfect for interview preparation and portfolio use.
 
 ---
 
-## 📧 Contact
+##  📧 Contact
 
 If you have suggestions or feedback, feel free to reach out through GitHub.
