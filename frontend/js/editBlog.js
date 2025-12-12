@@ -22,7 +22,7 @@ async function loadBlog() {
   }
 }
 
-
+loadBlog(); // Don't forget to call this function!
 
 // Handle form submit (UPDATE)
 const form = document.getElementById("editForm");
@@ -33,8 +33,15 @@ form.addEventListener("submit", async (e) => {
   const title = document.getElementById("title").value.trim();
   const description = document.getElementById("description").value.trim();
 
+  // At least one field must be filled
+  if (title === "" && description === "") {
+    alert("You must fill at least one field (Title or Description)!");
+    return;
+  }
+
   const token = localStorage.getItem("token");
 
+  // Only send fields that are not empty
   const body = {};
   if (title !== "") body.title = title;
   if (description !== "") body.description = description;
@@ -57,4 +64,12 @@ form.addEventListener("submit", async (e) => {
 
   alert("Blog updated successfully!");
   window.location.href = "details.html?id=" + blogId;
+});
+// Cancel button handler (MOVED OUTSIDE the form submit handler)
+document.getElementById("cancelBtn").addEventListener("click", () => {
+  const confirmCancel = confirm("Are you sure you want to cancel? Any unsaved changes will be lost.");
+  
+  if (confirmCancel) {
+    window.location.href = "dashboard.html";
+  }
 });

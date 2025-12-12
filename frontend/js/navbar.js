@@ -14,9 +14,14 @@ if (token && userId) {
 
   // Logout handler
   document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    window.location.href = "list.html";
+    const confirmLogout = confirm("Are you sure you want to logout?");
+    
+    if (confirmLogout) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      alert("Logged out successfully!");
+      window.location.href = "list.html";
+    }
   });
 } 
 else {
