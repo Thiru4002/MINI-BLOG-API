@@ -1,62 +1,63 @@
-async function loadAllBlogs(searchQuery = "") {
-  try {
+document.addEventListener("DOMContentLoaded", () => {
+  const loading = document.getElementById("loading");
+  const listEl = document.getElementById("allBlogs");
+  const searchBtn = document.getElementById("searchBtn");
+  const searchInput = document.getElementById("searchInput");
+
+  async function loadAllBlogs(searchQuery = "") {
     const url = searchQuery
       ? `https://mini-blog-api-m5ys.onrender.com/api/posts?search=${encodeURIComponent(searchQuery)}`
       : `https://mini-blog-api-m5ys.onrender.com/api/posts`;
 
-    const res = await fetch(url);
-    const data = await res.json();
+    try {
+      if (loading) loading.style.display = "flex"; // SHOW
 
-    if (!res.ok) {
-      alert(data.message || "Failed to load blogs");
-      return;
-    }
+      const res = await fetch(url);
+      const data = await res.json();
 
-    const blogs = data.posts;
-    const listEl = document.getElementById("allBlogs");
+      if (!res.ok) {
+        alert(data.message || "Failed to load blogs");
+        return;
+      }
 
-    if (blogs.length === 0) {
-      listEl.innerHTML = "<p>No blogs found.</p>";
-      return;
-    }
+      const blogs = data.posts || [];
 
-    listEl.innerHTML = blogs
-      .map(
-        (post) => `
-      <div class="blog-item">
-        <h3>${post.title}</h3>
-        <p>By <strong>${post.author?.username || "Unknown"}</strong></p>
-        <p>${new Date(post.createdAt).toLocaleDateString()}</p>
-        <p>${post.description}</p>
+      if (blogs.length === 0) {
+        listEl.innerHTML = "<p>No blogs found.</p>";
+        return;
+      }
 
-        <div class="blog-actions">
-          <a href="details.html?id=${post._id}" class="btn">View</a>
+      listEl.innerHTML = blogs.map(post => `
+        <div class="blog-item">
+          <h3>${post.title}</h3>
+          <p>By <strong>${post.author?.username || "Unknown"}</strong></p>
+          <p>${new Date(post.createdAt).toLocaleDateString()}</p>
+          <p>${post.description}</p>
+          <div class="blog-actions">
+            <a href="details.html?id=${post._id}" class="btn">View</a>
+          </div>
         </div>
-      </div>
-      `
-      )
-      .join("");
+      `).join("");
 
-  } catch (err) {
-    console.error(err);
-    alert("Error loading blogs");
+    } catch (err) {
+      console.error("Blog load error:", err);
+      alert("Server is waking up, please try again");
+
+    } finally {
+      // ✅ ALWAYS runs (success / error / return)
+      if (loading) loading.style.display = "none"; // HIDE
+    }
   }
-}
 
-loadAllBlogs(); // load initial blogs
+  loadAllBlogs();
 
-// -----------------------------
-// SEARCH EVENT
-// -----------------------------
-document.getElementById("searchBtn").addEventListener("click", () => {
-  const query = document.getElementById("searchInput").value.trim();
-  loadAllBlogs(query);
-});
+  searchBtn.addEventListener("click", () => {
+    loadAllBlogs(searchInput.value.trim());
+  });
 
-// Press ENTER to search
-document.getElementById("searchInput").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    const query = e.target.value.trim();
-    loadAllBlogs(query);
-  }
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      loadAllBlogs(e.target.value.trim());
+    }
+  });
 });

@@ -18,10 +18,13 @@ app.use(
 app.use(
   cors({
     origin: "*", // allow all origins
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+app.options("*", cors());
+
 
 // rate limiting
 const limiter = rateLimit({

@@ -1,75 +1,118 @@
-// Get blog id from URL example: edit.html?id=123
-const params = new URLSearchParams(window.location.search);
-const blogId = params.get("id");
+document.addEventListener("DOMContentLoaded", () => {
+  // Get blog ID from URL: edit.html?id=123
+  const params = new URLSearchParams(window.location.search);
+  const blogId = params.get("id");
 
-// Load existing blog data into form
-async function loadBlog() {
-  try {
-    const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`);
-    const data = await res.json();
+  if (!blogId) {
+    alert("Invalid blog ID");
+    window.location.href = "dashboard.html";
+    return;
+  }
 
-    if (!res.ok || !data.data) {
-      alert("Failed to load blog details");
+  const form = document.getElementById("editForm");
+  const titleInput = document.getElementById("title");
+  const descriptionInput = document.getElementById("description");
+  const cancelBtn = document.getElementById("cancelBtn");
+
+  if (!form || !titleInput || !descriptionInput) {
+    console.error("Edit form elements not found");
+    return;
+  }
+
+  /* ---------------------------
+     LOAD EXISTING BLOG
+  ---------------------------- */
+  async function loadBlog() {
+    try {
+      const res = await fetch(
+        `https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`
+      );
+      const data = await res.json();
+
+      // Handle different backend response shapes safely
+      const post = data.data || data.post || data;
+
+      if (!res.ok || !post) {
+        alert("Failed to load blog details");
+        return;
+      }
+
+      titleInput.value = post.title || "";
+      descriptionInput.value = post.description || "";
+
+    } catch (err) {
+      console.error("Error loading blog:", err);
+      alert("Error loading blog details");
+    }
+  }
+
+  loadBlog();
+
+  /* ---------------------------
+     UPDATE BLOG
+  ---------------------------- */
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const title = titleInput.value.trim();
+    const description = descriptionInput.value.trim();
+
+    if (!title && !description) {
+      alert("Please update at least one field");
       return;
     }
 
-    document.getElementById("title").value = data.data.title;
-    document.getElementById("description").value = data.data.description;
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Session expired. Please login again.");
+      window.location.href = "login.html";
+      return;
+    }
 
-  } catch (err) {
-    console.error(err);
-    alert("Failed to load blog details");
-  }
-}
+    const body = {};
+    if (title) body.title = title;
+    if (description) body.description = description;
 
-loadBlog(); // Don't forget to call this function!
+    try {
+      const res = await fetch(
+        `https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
-// Handle form submit (UPDATE)
-const form = document.getElementById("editForm");
+      const data = await res.json();
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+      if (!res.ok) {
+        alert(data.message || "Failed to update blog");
+        return;
+      }
 
-  const title = document.getElementById("title").value.trim();
-  const description = document.getElementById("description").value.trim();
+      alert("Blog updated successfully!");
+      window.location.href = `details.html?id=${blogId}`;
 
-  // At least one field must be filled
-  if (title === "" && description === "") {
-    alert("You must fill at least one field (Title or Description)!");
-    return;
-  }
-
-  const token = localStorage.getItem("token");
-
-  // Only send fields that are not empty
-  const body = {};
-  if (title !== "") body.title = title;
-  if (description !== "") body.description = description;
-
-  const res = await fetch(`https://mini-blog-api-m5ys.onrender.com/api/posts/${blogId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify(body)
+    } catch (err) {
+      console.error("Update failed:", err);
+      alert("Server error while updating blog");
+    }
   });
 
-  const data = await res.json();
-
-  if (!res.ok) {
-    alert(data.message || "Failed to update blog");
-    return;
-  }
-
-  alert("Blog updated successfully!");
-  window.location.href = "details.html?id=" + blogId;
-});
-// Cancel button handler (MOVED OUTSIDE the form submit handler)
-document.getElementById("cancelBtn").addEventListener("click", () => {
-  const confirmCancel = confirm("Are you sure you want to cancel? Any unsaved changes will be lost.");
-  
-  if (confirmCancel) {
-    window.location.href = "dashboard.html";
+  /* ---------------------------
+     CANCEL BUTTON
+  ---------------------------- */
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      const confirmCancel = confirm(
+        "Are you sure you want to cancel? Unsaved changes will be lost."
+      );
+      if (confirmCancel) {
+        window.location.href = "dashboard.html";
+      }
+    });
   }
 });

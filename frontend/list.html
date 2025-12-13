@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="list-page">
+
+  
+  <div id="loading" class="loading-overlay">
+    Loading posts, please wait...
+  </div>
+
+
   <header>
     <div class="container">
       <h1>My App</h1>
@@ -39,7 +46,7 @@
     </div>
 
     <script src="js/navbar.js"></script>
-    <script src="./js/listBlogs.js"></script>
+    <script src="./js/listBlogs.js" defer></script>
     <script src="js/scrollHeader.js"></script>
   </main>
 
@@ -48,4 +55,5 @@
     <p>&copy; 2025 My App. All rights reserved.</p>
   </footer>
 </body>
+
 </html>
