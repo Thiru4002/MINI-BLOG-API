@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    alert("Blog created successfully!");
+    alert("Blog created successfully!..");
     window.location.href = "dashboard.html";
 
   } catch (err) {
