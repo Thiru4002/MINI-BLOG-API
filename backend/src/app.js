@@ -42,7 +42,7 @@ const commentRoutes = require("./routes/commentRoutes");
 const {swaggerUi,swaggerSpec} = require("./config/swagger");
 
 /* ---------------------------
-   SWAGGER SETUP
+   SWAGGER SETUP..
 ----------------------------*/
 
 const swaggerUiOptions = {
