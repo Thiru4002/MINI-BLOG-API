@@ -74,6 +74,11 @@ app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Mini Blog API is running' });
+});
+
+
 /* ---------------------------
    GLOBAL ERROR HANDLER
 ----------------------------*/
